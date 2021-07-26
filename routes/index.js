@@ -59,13 +59,10 @@ router.post ('/login', async function (req, res, next) {
     console.log("error///", error)
   }
   if(error.length == 0) {
-      userin = await userModel.findOne({
-      email : req.body.email,
-      password: req.body.password
-    })
-      console.log("reqbodymail///", req.body.email)
-    if (userin) {
-      result = true
+    userin = await userModel.findOne({email : req.body.email,})
+    if(bcrypt.compareSync(req.body.password, userin.password)) {
+      result=true
+      token = userin.token
     } else {
       error.push('veuillez verifier vos identifiants')
       console.log("error connex", error)
