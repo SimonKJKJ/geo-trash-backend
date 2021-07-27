@@ -71,7 +71,7 @@ router.post ('/login', async function (req, res, next) {
   }
   res.json({userin, result, error})
 })
-//////////////////////////////////////////////////////////////////////add trash////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////add trash/////////////////////////////////////////////
 router.post('/addtrash', async function (req,res,next) {
   let addtrash = new trashModel ({
     latitude: req.body.latitude,
@@ -84,6 +84,10 @@ router.post('/addtrash', async function (req,res,next) {
   res.json({newtrash})
 })
 ////////////////////////////////////////////////////////////////////call trash//////////////////////////////////////////////
-
+router.get('/calltrash', async function (req, res, next) {
+  let recuptrash = await trashModel.find()
+  console.log('ok', recuptrash)
+  res.json({recuptrash})
+})
 
 module.exports = router;
