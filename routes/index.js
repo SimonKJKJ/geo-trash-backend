@@ -5,6 +5,7 @@ let uid2 = require("uid2");
 let bcrypt = require("bcrypt");
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let userModel = require('../models/users');
+let trashModel = require('../models/trash')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -68,9 +69,21 @@ router.post ('/login', async function (req, res, next) {
       console.log("error connex", error)
     }
   }
-
-
   res.json({userin, result, error})
 })
+//////////////////////////////////////////////////////////////////////add trash////////////////////////////////////////////
+router.post('/addtrash', async function (req,res,next) {
+  let addtrash = new trashModel ({
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
+    color: req.body.color,
+  })
+  console.log("reqcolor", req.body.color)
+  console.log('reqbody//', req.body)
+  let newtrash = await addtrash.save()
+  res.json({newtrash})
+})
+////////////////////////////////////////////////////////////////////call trash//////////////////////////////////////////////
+
 
 module.exports = router;
