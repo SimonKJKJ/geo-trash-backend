@@ -86,7 +86,7 @@ router.post('/addtrash', async function (req,res,next) {
 ////////////////////////////////////////////////////////////////////call trash//////////////////////////////////////////////
 router.get('/calltrash', async function (req, res, next) {
   let recuptrash = await trashModel.find()
-  console.log('ok', recuptrash)
+  console.log('okd', recuptrash)
   res.json({recuptrash})
 })
 
