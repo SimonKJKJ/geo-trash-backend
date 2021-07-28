@@ -3,9 +3,10 @@ var router = express.Router();
 /////////////////////////////////////////////////token user + chiffrage mdp/////////////////////////////////////////
 let uid2 = require("uid2");
 let bcrypt = require("bcrypt");
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////IMPORTS MODELS////////////////////////////////////////////////////////////
 let userModel = require('../models/users');
-let trashModel = require('../models/trash')
+let trashModel = require('../models/trash');
+let parcoursModel = require('../models/parcours');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -89,5 +90,20 @@ router.get('/calltrash', async function (req, res, next) {
   console.log('okd', recuptrash)
   res.json({recuptrash})
 })
+///////////////////////////////////////////////////////////////////PARCOURS/////////////////////////////////////////////////
+router.get('/parcours', async function (req, res, next) {
+  let recupparc = await parcoursModel.find()
+  console.log("parcours", recupparc)
+  res.json({recupparc})
+})
 
+router.post('/parcours', async function (req,res,next) {
+ let sendparc = new parcoursModel ({
+  latitude: req.body.latitude,
+  longitude: req.body.longitude,
+  name: req.body.name,
+ })
+ let newparc = await sendparc.save()
+  res.json({newparc})
+})
 module.exports = router;
