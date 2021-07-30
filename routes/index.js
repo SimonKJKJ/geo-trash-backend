@@ -1,18 +1,17 @@
 var express = require('express');
 var router = express.Router();
-/////////////////////////////////////////////////token user + chiffrage mdp/////////////////////////////////////////
+/////////////////////////////////////////////////token user + chiffrage mdp///////////////////////////////////////////////////////
 let uid2 = require("uid2");
 let bcrypt = require("bcrypt");
 ///////////////////////////////////////////////////////IMPORTS MODELS////////////////////////////////////////////////////////////
 let userModel = require('../models/users');
 let trashModel = require('../models/trash');
 let parcoursModel = require('../models/parcours');
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-///////////////////////////////////////////////////////SIGNUP///////////////////////////////////////
+///////////////////////////////////////////////////////SIGNUP///////////////////////////////////////////////////////////////////
 router.post('/signup', async function (req,res,next) {
   let newUser= null;
   let result = false
@@ -74,11 +73,13 @@ router.post ('/login', async function (req, res, next) {
 })
 //////////////////////////////////////////////////////////////////////add trash/////////////////////////////////////////////
 router.post('/addtrash', async function (req,res,next) {
+  
   let addtrash = new trashModel ({
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     color: req.body.color,
   })
+ 
   console.log("reqcolor", req.body.color)
   console.log('reqbody//', req.body)
   let newtrash = await addtrash.save()
@@ -96,7 +97,6 @@ router.get('/parcours', async function (req, res, next) {
   console.log("parcours", recupparc)
   res.json({recupparc})
 })
-
 router.post('/parcours', async function (req,res,next) {
  let sendparc = new parcoursModel ({
   latitude: req.body.latitude,

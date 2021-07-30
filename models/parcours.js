@@ -3,7 +3,7 @@ let mongoose = require('mongoose');
 let parcoursSchema = mongoose.Schema({
     latitude: Number,
     longitude: Number,
-    name: String,
+    name: String, 
 })
 
 let parcoursModel = mongoose.model('parcours', parcoursSchema);
