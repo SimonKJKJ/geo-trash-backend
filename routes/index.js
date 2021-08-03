@@ -14,8 +14,8 @@ router.get('/', function(req, res, next) {
 ///////////////////////////////////////////////////////SIGNUP///////////////////////////////////////////////////////////////////
 router.post('/signup', async function (req,res,next) {
   let newUser= null;
-  let result = false
-  let error = []
+  let result = false;
+  let error = [];
   let hash = bcrypt.hashSync(req.body.password, 10);
 
   const userdata = await userModel.findOne({
@@ -72,7 +72,7 @@ router.post ('/login', async function (req, res, next) {
   res.json({userin, result, error})
 })
 //////////////////////////////////////////////////////////////////////add trash/////////////////////////////////////////////
-router.post('/addtrash', async function (req,res,next) {
+router.post('/addtrash', async function (req,res,next) { 
   
   let addtrash = new trashModel ({
     latitude: req.body.latitude,
@@ -107,3 +107,15 @@ router.post('/parcours', async function (req,res,next) {
   res.json({newparc})
 })
 module.exports = router;
+/////////////////////////////////////////////////////////////recup couleur////////////////////////////////////////////
+router.get('/trash/color/:color', async function (req, res, next) {
+  let colort = req.params.color; 
+  let colorfilter = await trashModel.find({color: colort})
+  console.log("color", colorfilter )
+  if(colorfilter) {
+   res.json({colorfilter}) 
+  } else {
+    res.json({result: false})
+  }
+  
+})
