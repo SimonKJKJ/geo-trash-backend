@@ -108,3 +108,13 @@ router.post('/parcours', async function (req,res,next) {
 })
 module.exports = router;
 /////////////////////////////////////////////////////////////recup couleur////////////////////////////////////////////
+router.get('/trash/color/:color', async function (req, res, next) {
+  let colort = req.params.color; 
+  let colorfilter = await trashModel.find({color: colort})
+  console.log("color", colorfilter )
+  if(colorfilter) {
+   res.json({colorfilter}) 
+  } else {
+    res.json({result: false})
+  }
+})
