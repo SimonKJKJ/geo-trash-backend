@@ -72,7 +72,6 @@ router.post ('/login', async function (req, res, next) {
 })
 //////////////////////////////////////////////////////////////////////add trash/////////////////////////////////////////////
 router.post('/addtrash', async function (req,res,next) { 
-  
   let addtrash = new trashModel ({
     latitude: req.body.latitude,
     longitude: req.body.longitude,
@@ -82,6 +81,7 @@ router.post('/addtrash', async function (req,res,next) {
   console.log("reqcolor", req.body.color)
   console.log('reqbody//', req.body)
   let newtrash = await addtrash.save()
+  
   res.json({newtrash})
 })
 ////////////////////////////////////////////////////////////////////call trash//////////////////////////////////////////////
