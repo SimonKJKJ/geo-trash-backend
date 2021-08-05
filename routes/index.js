@@ -6,7 +6,6 @@ let bcrypt = require("bcrypt");
 ///////////////////////////////////////////////////////IMPORTS MODELS////////////////////////////////////////////////////////////
 let userModel = require('../models/users');
 let trashModel = require('../models/trash');
-let parcoursModel = require('../models/parcours');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -91,22 +90,6 @@ router.get('/calltrash', async function (req, res, next) {
   console.log('okd', recuptrash)
   res.json({recuptrash})
 })
-///////////////////////////////////////////////////////////////////PARCOURS/////////////////////////////////////////////////
-router.get('/parcours', async function (req, res, next) {
-  let recupparc = await parcoursModel.find()
-  console.log("parcours", recupparc)
-  res.json({recupparc})
-})
-router.post('/parcours', async function (req,res,next) {
- let sendparc = new parcoursModel ({
-  latitude: req.body.latitude,
-  longitude: req.body.longitude,
-  name: req.body.name,
- })
- let newparc = await sendparc.save()
-  res.json({newparc})
-})
-module.exports = router;
 /////////////////////////////////////////////////////////////recup couleur////////////////////////////////////////////
 router.get('/trash/color/:color', async function (req, res, next) {
   let colort = req.params.color; 
@@ -118,3 +101,5 @@ router.get('/trash/color/:color', async function (req, res, next) {
     res.json({result: false})
   }
 })
+
+module.exports = router;
